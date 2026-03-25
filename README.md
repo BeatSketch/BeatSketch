@@ -8,6 +8,8 @@
 ## Development
 To get live-updates, use [lodr](https://github.com/mcclure/lodr).
 
+To install the dependencies, run `luarocks --deps-only beatsketch-dev-1.rockspec`
+
 
 ## Usage
 Download and install (optional) [LÖVR](https://lovr.org).
