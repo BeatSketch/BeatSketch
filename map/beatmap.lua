@@ -12,6 +12,9 @@ local BeatMap = {}
 --- @param bpm number
 --- @return BeatMap
 function BeatMap:new(bpm)
+	if type(bpm) ~= "number" then
+		error("BPM not a number")
+	end
 	local o = {
 		data = {
 			version = "3.3.0",
@@ -76,6 +79,34 @@ function BeatMap:add_block(beat, x, y, hand, direction)
 		return true
 	end
 	return false
+end
+
+--- Add a new bpm event. Changes the BPM from this beat onwards
+--- @param beat number The beat index where the block is to be placed
+--- @param bpm number The new value for BPM
+--- @return boolean true if successful, false otherwise
+function BeatMap:add_bpm_event(beat, bpm)
+	-- Type check
+	if type(bpm) == "number" then
+		-- Create a new block
+		local bpmEvent = {
+			b = beat,
+			bpm = bpm,
+		}
+
+		-- Put that block into the table
+		self.data.bpmEvents[self.counts.bpmEvents] = bpmEvent
+		self.counts.bpmEvents = self.counts.bpmEvents + 1
+
+		return true
+	end
+	return false
+end
+
+--- Returns the current BPM
+---@return number
+function BeatMap:get_current_bpm()
+	return self.data.bpmEvents[self.counts.bpmEvents - 1]
 end
 
 return BeatMap
