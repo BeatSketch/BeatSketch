@@ -94,7 +94,7 @@ function BeatMap:add_bpm_event(beat, bpm)
 			bpm = bpm,
 		}
 
-		-- Put that block into the table
+		-- Put that bpm event into the table
 		self.data.bpmEvents[self.counts.bpmEvents] = bpmEvent
 		self.counts.bpmEvents = self.counts.bpmEvents + 1
 

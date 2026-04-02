@@ -53,17 +53,17 @@ function InfoFile:new(bpm, audio_file, song_duration, name, subtitle, author)
 	return o
 end
 
---- Save the BeatMap to disk
---- @param path string The file path to save to
-function InfoFile:save(path)
-	local file = io.open(path, "w")
+--- Save to disk
+--- @param dir string The directory to save to
+function InfoFile:save(dir)
+	local file = io.open(dir .. "/Info.dat", "w")
 	if file then
 		file:write(json.encode(self.data))
 		file:close()
 	end
 end
 
---- Save the BeatMap to disk
+--- Add a beatmap difficulty to the map
 --- @param difficulty string The file path to save to
 --- @param njs number The note jump speed
 --- @param njs_offset number Note jump offset
