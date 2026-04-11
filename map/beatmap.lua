@@ -1,12 +1,56 @@
 -- Import json library
 local json = require("json")
 
+-- ── Begin TYPEDEF ────────────────────────────────────────────────
+--- @class BeatMapData
+--- @field version string
+--- @field bpmEvents BPMEvents
+--- @field colorNotes ColorNotes
+
+--- @alias BPMEvents table<number, BPMEvent>
+--- @alias ColorNotes table<number, ColorNote>
+
+--- @class ColorNote
+--- @field b number
+--- @field x number
+--- @field y number
+--- @field c number The hand (= color), 0 = left, 1 = right
+--- @field d number The cut direction, see https://bsmg.wiki/mapping/map-format/beatmap.html#color-notes
+
+--- @class BPMEvent
+--- @field b number The beat to set it at
+--- @field m number The bpm to set
+
+--- @class BeatMapIndices
+--- @field bpmEvents number
+--- @field colorNotes number
+
 --- The BeatMap file abstraction. Only use the provided functions
 --- to mutate the state as they provide some guards
 --- @class BeatMap
---- @field data table
---- @field counts table
+--- @field data BeatMapData
+--- @field private counts BeatMapIndices
 local BeatMap = {}
+
+--- @enum SaberHand
+BeatMap.SABER_HAND = {
+	LEFT = 0,
+	RIGHT = 1,
+}
+
+--- @enum CutDirection
+BeatMap.SABER_HAND = {
+	UP = 0,
+	DOWN = 1,
+	LEFT = 2,
+	RIGHT = 3,
+	UP_LEFT = 4,
+	UP_RIGHT = 5,
+	DOWN_LEFT = 6,
+	DOWN_RIGHT = 7,
+	ANY = 8,
+}
+-- ── END TYPEDEF ──────────────────────────────────────────────────
 
 --- Create a new BeatMap
 --- @param bpm number
@@ -51,9 +95,9 @@ end
 --- @param beat number The beat index where the block is to be placed
 --- @param x number The lane for the block
 --- @param y number The level (i.e. height above lane) for the block
---- @param hand number Set to 0 for left hand, 1 for right
---- @param direction number The direction to hit in.
---- @return boolean True if successful
+--- @param hand SaberHand Set to 0 for left hand, 1 for right
+--- @param direction CutDirection The direction to hit in.
+--- @return boolean - True if successful
 function BeatMap:add_block(beat, x, y, hand, direction)
 	-- Type check
 	if
@@ -106,7 +150,7 @@ end
 --- Returns the current BPM
 ---@return number
 function BeatMap:get_current_bpm()
-	return self.data.bpmEvents[self.counts.bpmEvents - 1]
+	return self.data.bpmEvents[self.counts.bpmEvents - 1].m
 end
 
 return BeatMap
