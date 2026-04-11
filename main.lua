@@ -28,15 +28,15 @@ end
 -- │                    Drawing                    │
 -- └                                               ┘
 -- Drawing the screen is called once every frame
+--- @param pass Pass
 function lovr.draw(pass)
 	pass:text("Hello World!", 0, 1.7, -2, 0.5)
+	pass:text("BeatSketch", 0, 1.2, -2, 0.25)
 end
 
 -- ┌                                               ┐
 -- │              Physics / Tracking               │
 -- └                                               ┘
 -- Tracking and the like get continuous updates
-local tracking = require("tracking.main")
-function lovr.update(delta_time)
-	tracking.tracker(delta_time)
-end
+local tracking = require("util.tracking")
+function lovr.update(delta_time) end
