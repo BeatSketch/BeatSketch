@@ -1,0 +1,26 @@
+# TODOs
+## Renderer
+- [ ] Desktop UI / Launcher
+- [ ] Sabers
+- [ ] Tracking line (Saber tip? Controller position?)
+- [ ] In-VR UI elements such as placed number of blocks, current blocks per minute, song position, pause menu (with seek to time, delete all future, resume)
+- [ ] 4 lanes
+- [ ] Add some animation for bpm?
+
+## UI Library (in VR)
+- [ ] Buttons
+- [ ] Text
+
+## Audio
+- [ ] Song loading
+- [ ] Play / Pause / Seek
+
+## Tracking
+- [ ] Assign tracking position to blocks
+- [ ] Grid system
+- [ ] Show lines for saber tip -> Discuss
+- [ ] Implement saber tip computation
+
+## Others
+- [ ] BPM detect?
+- [ ] Desktop UI to pick song file, cover art, song name, artist name, mapper name, bpm (or auto-detect)?, preview window?, preview duration?, save location for the map
