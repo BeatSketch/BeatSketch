@@ -23,6 +23,10 @@ To get live-updates, use [lodr](https://github.com/mcclure/lodr).
 - For VSCode, see [here](https://lovr.org/docs/dev/VS_Code_Setup)
 
 
+## Other remarks
+Commits and pull requests should follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) standard, Version 1.0.0.
+
+
 
 ## Attribution
 Map format explanations from [BSMG Wiki](https://bsmg.wiki/mapping/map-format.html) helped a lot with getting that right quickly
