@@ -11,6 +11,7 @@
 -- FIXME: Make this more reliable/versatile
 -- TODO: Consider just putting the library in here
 local lua_version = _VERSION:sub(5)
+-- NOTE: Can use the below to get also user-set env vars (as expected)
 local cwd = os.getenv("PWD")
 package.path = package.path .. ";" .. cwd .. "/BeatSketch/lua_modules/share/lua/" .. lua_version .. "/?.lua"
 
@@ -39,4 +40,8 @@ end
 -- └                                               ┘
 -- Tracking and the like get continuous updates
 local tracking = require("util.tracking")
-function lovr.update(delta_time) end
+local song = tracking:new()
+function lovr.update(delta_time)
+    song:hands(delta_time)
+    song:head(delta_time)
+end
