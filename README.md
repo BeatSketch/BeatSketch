@@ -13,9 +13,6 @@ To run it, follow [this guide](https://lovr.org/docs/Getting_Started#running-a-p
 If you are using Linux with a Wayland Compositor, use [gamescope](https://github.com/ValveSoftware/gamescope) to run it
 `gamescope lovr main.lua`
 
-To install the dependencies, run `luarocks --deps-only beatsketch-dev-1.rockspec`
-
-
 ### Hot reloading
 To get live-updates, use [lodr](https://github.com/mcclure/lodr).
 

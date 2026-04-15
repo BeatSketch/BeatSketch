@@ -8,13 +8,6 @@
 
 --]]
 
--- FIXME: Make this more reliable/versatile
--- TODO: Consider just putting the library in here
-local lua_version = _VERSION:sub(5)
--- NOTE: Can use the below to get also user-set env vars (as expected)
-local cwd = os.getenv("PWD")
-package.path = package.path .. ";" .. cwd .. "/BeatSketch/lua_modules/share/lua/" .. lua_version .. "/?.lua"
-
 -- ┌                                               ┐
 -- │                 Configuration                 │
 -- └                                               ┘

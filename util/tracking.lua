@@ -1,3 +1,6 @@
+-- Import json library
+local json = require("json")
+
 -- ── Begin TYPEDEF ────────────────────────────────────────────────
 --- @alias hands "left" | "right"
 
@@ -103,6 +106,16 @@ end
 --- Which is probably better, anyway
 function Tracking:set_song_start()
 	self.songStart = os.time()
+end
+
+--- Save the tracking data to a json file
+---@param path string The path to save to
+function Tracking:save(path)
+	local file = io.open(path, "w")
+	if file then
+		file:write(json.encode(self.data))
+		file:close()
+	end
 end
 
 --- Get the tracking data
