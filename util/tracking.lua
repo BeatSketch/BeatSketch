@@ -9,7 +9,6 @@ local json = require("json")
 --- @class Tracking
 --- @field data TrackingData
 --- @field private idx TrackingIndices
---- @field private songStart number
 local Tracking = {}
 
 --- @class TrackingData
@@ -56,7 +55,6 @@ function Tracking:new()
 			right = 0,
 			head = 0,
 		},
-		songStart = os.time(),
 	}
 	setmetatable(o, self)
 	self.__index = self
@@ -99,13 +97,6 @@ function Tracking:head(dt)
 		ry = ry,
 		rz = rz,
 	}
-end
-
---- Call this function upon starting the song
---- TODO: We may not need this, as it may be possible to use the audio playback position for this
---- Which is probably better, anyway
-function Tracking:set_song_start()
-	self.songStart = os.time()
 end
 
 --- Save the tracking data to a json file
