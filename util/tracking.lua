@@ -6,10 +6,10 @@ local json = require("json")
 
 --- Tracking and storing of the tracking. This can then be used to compute the map
 --- Only use the provided functions to mutate the state as they provide some guards
---- @class Tracking
+--- @class TrackingHistory
 --- @field data TrackingData
 --- @field private idx TrackingIndices
-local Tracking = {}
+local TrackingHistory = {}
 
 --- @class TrackingData
 --- @field left PositionStates
@@ -22,12 +22,10 @@ local Tracking = {}
 --- @field head number
 
 --- @class PositionState
---- @field x number X coordinate
---- @field y number Y coordinate
---- @field z number Z coordinate
---- @field rx number Rotation around x axis
---- @field ry number Rotation around y axis
---- @field rz number Rotation around z axis
+--- @field pos Vec3
+--- @field direction Vec3 The direction vector
+--- @field angle Quat
+--- @field delta number
 
 --- @alias PositionStates table<number, PositionState>
 
@@ -39,11 +37,9 @@ local Tracking = {}
 --- @alias Coordinates table<number, Coordinate>
 -- ── End TYPEDEF ──────────────────────────────────────────────────
 
-local headset = lovr.headset
-
 --- Create a new Tracking store
---- @return Tracking
-function Tracking:new()
+--- @return TrackingHistory
+function TrackingHistory:new()
 	local o = {
 		data = {
 			left = {},
@@ -62,46 +58,38 @@ function Tracking:new()
 end
 
 -- FIXME: Do we really need the delta time here
+--
 --- Store the hand position
 --- @param dt number The delta time between this and the last call
-function Tracking:hands(dt)
-	local x, y, z, _, rx, ry, rz = headset.getPose("left")
+function TrackingHistory:store_hands(dt)
 	self.data.left[self.idx.left] = {
-		x = x,
-		y = y,
-		z = z,
-		rx = rx,
-		ry = ry,
-		rz = rz,
+		pos = vec3(lovr.headset.getPosition("left")),
+		direction = vec3(lovr.headset.getDirection("left")),
+		angle = quat(lovr.headset.getOrientation("left")),
+		delta = dt,
 	}
-	x, y, z, _, rx, ry, rz = headset.getPose("right")
-	self.data.left[self.idx.left] = {
-		x = x,
-		y = y,
-		z = z,
-		rx = rx,
-		ry = ry,
-		rz = rz,
+	self.data.right[self.idx.right] = {
+		pos = vec3(lovr.headset.getPosition("right")),
+		direction = vec3(lovr.headset.getDirection("right")),
+		angle = quat(lovr.headset.getOrientation("right")),
+		delta = dt,
 	}
 end
 
 --- Store the headset position
 --- @param dt number The delta time between this and the last call
-function Tracking:head(dt)
-	local x, y, z, _, rx, ry, rz = headset.getPose("head")
+function TrackingHistory:store_head(dt)
 	self.data.head[self.idx.head] = {
-		x = x,
-		y = y,
-		z = z,
-		rx = rx,
-		ry = ry,
-		rz = rz,
+		pos = vec3(lovr.headset.getPosition("head")),
+		direction = vec3(lovr.headset.getDirection("head")),
+		angle = quat(lovr.headset.getOrientation("head")),
+		delta = dt,
 	}
 end
 
 --- Save the tracking data to a json file
 ---@param path string The path to save to
-function Tracking:save(path)
+function TrackingHistory:save(path)
 	local file = io.open(path, "w")
 	if file then
 		file:write(json.encode(self.data))
@@ -111,22 +99,22 @@ end
 
 --- Get the tracking data
 ---@return TrackingData - The tracking data object
-function Tracking:get()
+function TrackingHistory:get()
 	return self.data
 end
 
---- Get the coordinate of the tip of the saber for all stored poses
---- @param hand hands The hand to return it for
---- @return Coordinates tip the coordinate of the tip of the saber
-function Tracking:saber_tip(hand)
-	-- TODO: Implement
-	return {
-		{
-			x = 0,
-			y = 0,
-			z = 0,
-		},
-	}
+--- Get the tracking data
+--- @param length number
+--- @return Vec3 left - The tracking data object
+--- @return Vec3 right - The tracking data object
+function TrackingHistory:get_tips(length, idx)
+	return (self.data.left[idx].direction + self.data.left[idx].direction * length),
+		(self.data.right[idx].direction + self.data.right[idx].direction * length)
 end
 
-return Tracking
+function TrackingHistory:get_current_tips(length)
+	return (self.data.left[self.idx.left].direction + self.data.left[self.idx.left].direction * length),
+		(self.data.right[self.idx.right].direction + self.data.right[self.idx.right].direction * length)
+end
+
+return TrackingHistory

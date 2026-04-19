@@ -37,13 +37,12 @@ end
 -- │              Physics / Tracking               │
 -- └                                               ┘
 -- Tracking and the like get continuous updates
-local tracking = require("util.tracking")
-local song = tracking:new()
+-- local tracking = require("util.tracking")
+-- local song = tracking:new()
 function lovr.update(delta_time)
-    song:hands(delta_time)
-    song:head(delta_time)
     b:handler(function ()
         print("BOO")
+        sabers.angle = sabers.angle + 10
     end)
     sabers.track()
 end
