@@ -28,6 +28,7 @@ function M.track()
 	-- From https://lovr.org/docs/Interaction/Pointer_UI, modified
 	-- TODO: Get rotation working
 	-- Rotation of sabers to make them line up with what beat saber does
+    -- MAYBE: Add hand model (see lovr docs for how to)
 	for _, hand in ipairs(lovr.headset.getHands()) do
 		tips[hand] = tips[hand] or lovr.math.newVec3()
 
