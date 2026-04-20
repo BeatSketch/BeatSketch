@@ -28,24 +28,30 @@ function M.track()
 	-- From https://lovr.org/docs/Interaction/Pointer_UI, modified
 	-- TODO: Get rotation working
 	-- Rotation of sabers to make them line up with what beat saber does
-    -- MAYBE: Add hand model (see lovr docs for how to)
+	-- MAYBE: Add hand model (see lovr docs for how to)
+	-- FIXME: Just do this computation once, it's quite expensive,
+	-- we would need to do it twice (or more) with the current structure.
+	-- The issue is that we need to somehow know when to trigger a
+	-- re-computation vs serving from cache
 	for _, hand in ipairs(lovr.headset.getHands()) do
 		tips[hand] = tips[hand] or lovr.math.newVec3()
 
-        -- 1. Get vectors
-        -- 2. Determine plane in which the rotation axis has to be (all orthogonal vectors to direction)
-        -- 3. Pick one vector (with a coord being 0, length = 1)
-        -- 4. Rotate the vector with a quat around the direction vector
-        -- 5. Rotate the direction vector around the new vector with quat
+		-- 1. Get vectors
 		local rayPosition = vec3(lovr.headset.getPosition(hand))
-		local dir = vec3(lovr.headset.getDirection(hand))
-        local x, y, z = dir:unpack()
-		local rot = quat(M.angle, x, y, z) -- The quat is not correct yet, this rotates around the axis of the saber (thus not showing up)
-        dir:rotate(rot)
-		local rayDirection = rot:mul(dir)
-		print("Old vec", dir, "New vec", rayDirection)
+		local x, y, z = lovr.headset.getDirection(hand)
+		local dir = vec3(x, y, z)
 
-		tips[hand]:set(rayPosition + rayDirection * 1)
+		-- 2. Create quaternion to rotate
+		local a, ax, ay, az = lovr.headset.getOrientation(hand)
+		local rot_axis_rot = quat(a, ax, ay, az)
+		local rot_axis = rot_axis_rot:mul(vec3(1, 0, 0))
+		local rot = quat(M.angle, rot_axis:unpack())
+		-- 4. Rotate the vector with a quat around the direction vector
+		-- 5. Rotate the direction vector around the new vector with quat
+		-- local rot = quat(M.angle, x + 10, y, z) -- The quat is not correct yet, this rotates around the axis of the saber (thus not showing up)
+		local direction = rot:mul(dir)
+
+		tips[hand]:set(rayPosition + rot_axis_rot:mul(vec3(1, 0, 0)))
 	end
 end
 
