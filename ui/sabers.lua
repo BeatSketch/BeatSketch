@@ -42,15 +42,12 @@ function M.track()
 		local dir = vec3(lovr.headset.getDirection(hand))
 
 		-- 2. Create quaternion to rotate
-		local a, ax, ay, az = lovr.headset.getOrientation(hand)
-		local rot_axis_rot = quat(a, ax, ay, az)
+		local rot_axis_rot = quat(lovr.headset.getOrientation(hand))
 		local rot_axis = rot_axis_rot:mul(vec3(1, 0, 0)):normalize()
 		local rot = quat(M.angle / 180 * math.pi, rot_axis:unpack())
 
 		-- 3. Rotate the direction vector around the new vector with quat
-		local direction = rot:mul(dir)
-
-		tips[hand]:set(rayPosition + direction)
+		tips[hand]:set(rayPosition + rot:mul(dir))
 	end
 end
 
