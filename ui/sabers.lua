@@ -1,7 +1,8 @@
 local M = {}
 local tips = {}
 
-M.angle = 15
+--- @type number In degrees
+M.angle = -20
 
 --- Draw the sabers
 ---@param pass Pass the render pass
@@ -38,20 +39,18 @@ function M.track()
 
 		-- 1. Get vectors
 		local rayPosition = vec3(lovr.headset.getPosition(hand))
-		local x, y, z = lovr.headset.getDirection(hand)
-		local dir = vec3(x, y, z)
+		local dir = vec3(lovr.headset.getDirection(hand))
 
 		-- 2. Create quaternion to rotate
 		local a, ax, ay, az = lovr.headset.getOrientation(hand)
 		local rot_axis_rot = quat(a, ax, ay, az)
-		local rot_axis = rot_axis_rot:mul(vec3(1, 0, 0))
-		local rot = quat(M.angle, rot_axis:unpack())
-		-- 4. Rotate the vector with a quat around the direction vector
-		-- 5. Rotate the direction vector around the new vector with quat
-		-- local rot = quat(M.angle, x + 10, y, z) -- The quat is not correct yet, this rotates around the axis of the saber (thus not showing up)
+		local rot_axis = rot_axis_rot:mul(vec3(1, 0, 0)):normalize()
+		local rot = quat(M.angle / 180 * math.pi, rot_axis:unpack())
+
+		-- 3. Rotate the direction vector around the new vector with quat
 		local direction = rot:mul(dir)
 
-		tips[hand]:set(rayPosition + rot_axis_rot:mul(vec3(1, 0, 0)))
+		tips[hand]:set(rayPosition + direction)
 	end
 end
 
