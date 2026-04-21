@@ -1,0 +1,2 @@
+-- Utility to reduce the number of values for tracking that are stored to improve performance and reduce memory usage
+-- TODO: Decide what we want that based on?

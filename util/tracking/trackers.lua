@@ -8,14 +8,15 @@ M.angle = -20
 local button_list = {
 	"trigger",
 	"thumbrest",
-    "grip",
-    "menu",
+	"grip",
+	"menu",
 	"a",
 	"b",
 	"x",
 	"y",
-    "nib",
+	"nib",
 }
+
 --- Get all buttons on the device that are pressed
 ---@param device "head" | "left" | "right"
 ---@param buttons string[]
@@ -25,9 +26,11 @@ local function get_down_buttons(device, buttons)
 	local idx = 0
 
 	for _, value in pairs(buttons) do
-		if pcall(function()
-			return lovr.headset.isDown(device, value)
-		end) and lovr.headset.isDown(device, value) then
+		if
+			pcall(function()
+				return lovr.headset.isDown(device, value)
+			end) and lovr.headset.isDown(device, value)
+		then
 			pressed[idx] = value
 			idx = idx + 1
 		end
