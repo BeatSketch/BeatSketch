@@ -1,7 +1,8 @@
 # TODOs
 ## Renderer
 - [ ] Desktop UI / Launcher
-- [ ] Sabers
+- [X] Sabers
+- [ ] Sabers: Rotatable in all directions
 - [ ] Tracking line (Saber tip? Controller position?)
 - [ ] In-VR UI elements such as placed number of blocks, current blocks per minute, song position, pause menu (with seek to time, delete all future, resume)
 - [ ] 4 lanes
@@ -19,7 +20,7 @@
 - [ ] Assign tracking position to blocks
 - [ ] Grid system
 - [ ] Show lines for saber tip -> Discuss
-- [ ] Implement saber tip computation
+- [ ] Implement saber tip computation -> Needs to be unified
 
 ## Others
 - [ ] BPM detect?
