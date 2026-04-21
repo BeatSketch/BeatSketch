@@ -1,3 +1,4 @@
+local tracking = require("util.tracking.tracking")
 --- @alias ColorType "active"|"hover"|"normal"
 --- @class Color
 --- @field r number
@@ -33,63 +34,63 @@ local Button = {}
 ---@param text_size number The text size as fraction of normal scale
 ---@return Button a new button
 function Button:new(x, y, z, rx, ry, rz, w, h, text, text_size)
-    local o = {
-        text = text,
-        text_size = text_size,
-        position = lovr.math.newVec3(x, y, z),
-        rotation = lovr.math.newVec3(rx, ry, rz),
-        width = w,
-        height = h,
-        hover = false,
-        active = false,
-        active_color = {
-            r = 0.4,
-            g = 0.4,
-            b = 0.4,
-        },
-        hovered_color = {
-            r = 0.2,
-            g = 0.2,
-            b = 0.2,
-        },
-        color = {
-            r = 0.1,
-            g = 0.1,
-            b = 0.1,
-        },
-        active_color_text = {
-            r = 1,
-            g = 1,
-            b = 1,
-        },
-        hovered_color_text = {
-            r = 1,
-            g = 1,
-            b = 1,
-        },
-        color_text = {
-            r = 1,
-            g = 1,
-            b = 1,
-        },
-    }
-    setmetatable(o, self)
-    self.__index = self
-    return o
+	local o = {
+		text = text,
+		text_size = text_size,
+		position = lovr.math.newVec3(x, y, z),
+		rotation = lovr.math.newVec3(rx, ry, rz),
+		width = w,
+		height = h,
+		hover = false,
+		active = false,
+		active_color = {
+			r = 0.4,
+			g = 0.4,
+			b = 0.4,
+		},
+		hovered_color = {
+			r = 0.2,
+			g = 0.2,
+			b = 0.2,
+		},
+		color = {
+			r = 0.1,
+			g = 0.1,
+			b = 0.1,
+		},
+		active_color_text = {
+			r = 1,
+			g = 1,
+			b = 1,
+		},
+		hovered_color_text = {
+			r = 1,
+			g = 1,
+			b = 1,
+		},
+		color_text = {
+			r = 1,
+			g = 1,
+			b = 1,
+		},
+	}
+	setmetatable(o, self)
+	self.__index = self
+	return o
 end
 
 local function raycast(rayPos, rayDir, planePos, planeDir)
-    local dot = rayDir:dot(planeDir)
-    if math.abs(dot) < 0.001 then
-        return nil
-    else
-        local distance = (planePos - rayPos):dot(planeDir) / dot
-        if distance > 0 then
-            return rayPos + rayDir * distance
-        else
-            return nil
-        end
-    end
+	local dot = rayDir:dot(planeDir)
+	if math.abs(dot) < 0.001 then
+		return nil
+	else
+		local distance = (planePos - rayPos):dot(planeDir) / dot
+		if distance > 0 then
+			return rayPos + rayDir * distance
+		else
+			return nil
+		end
+	end
 end
 
 --- Set the color for the button
@@ -98,18 +99,18 @@ end
 ---@param g number
 ---@param b number
 function Button:set_color(kind, r, g, b)
-    local col = {
-        r = r,
-        g = g,
-        b = b,
-    }
-    if kind == "active" then
-        self.active_color = col
-    elseif kind == "hover" then
-        self.hovered_color = col
-    else
-        self.color = col
-    end
+	local col = {
+		r = r,
+		g = g,
+		b = b,
+	}
+	if kind == "active" then
+		self.active_color = col
+	elseif kind == "hover" then
+		self.hovered_color = col
+	else
+		self.color = col
+	end
 end
 
 --- Set the text color for the button
@@ -118,30 +119,30 @@ end
 ---@param g number
 ---@param b number
 function Button:set_text_color(kind, r, g, b)
-    local col = {
-        r = r,
-        g = g,
-        b = b,
-    }
-    if kind == "active" then
-        self.active_color_text = col
-    elseif kind == "hover" then
-        self.hovered_color_text = col
-    else
-        self.color_text = col
-    end
+	local col = {
+		r = r,
+		g = g,
+		b = b,
+	}
+	if kind == "active" then
+		self.active_color_text = col
+	elseif kind == "hover" then
+		self.hovered_color_text = col
+	else
+		self.color_text = col
+	end
 end
 
 --- Set the text of the button
 ---@param text string
 function Button:set_text(text)
-    self.text = text
+	self.text = text
 end
 
 --- Set the text of the button
 ---@param size number
 function Button:set_text_size(size)
-    self.text_size = size
+	self.text_size = size
 end
 
 --- Set the text of the button
@@ -152,70 +153,66 @@ end
 ---@param ry number Rotation around Y axis
 ---@param rz number Rotation around Y axis
 function Button:set_position(x, y, z, rx, ry, rz)
-    self.position = lovr.math.newVec3(x, y, z)
-    self.rotation = lovr.math.newVec3(rx, ry, rz)
+	self.position = lovr.math.newVec3(x, y, z)
+	self.rotation = lovr.math.newVec3(rx, ry, rz)
 end
 
 ---Draw a button at specified position with given text.
 ---On press, cb is executed
 ---@param pass Pass
 function Button:draw(pass)
-    -- Button background
-    if self.active then
-        pass:setColor(self.active_color.r, self.active_color.g, self.active_color.b)
-    elseif self.hover then
-        pass:setColor(self.hovered_color.r, self.hovered_color.g, self.hovered_color.b)
-    else
-        pass:setColor(self.color.r, self.color.g, self.color.b)
-    end
-    pass:plane(self.position, self.width, self.height)
+	-- Button background
+	if self.active then
+		pass:setColor(self.active_color.r, self.active_color.g, self.active_color.b)
+	elseif self.hover then
+		pass:setColor(self.hovered_color.r, self.hovered_color.g, self.hovered_color.b)
+	else
+		pass:setColor(self.color.r, self.color.g, self.color.b)
+	end
+	pass:plane(self.position, self.width, self.height)
 
-    -- Button text (add a small amount to the z to put the text slightly in front of button)
-    if self.active then
-        pass:setColor(self.active_color_text.r, self.active_color_text.g, self.active_color_text.b)
-    elseif self.hover then
-        pass:setColor(self.hovered_color_text.r, self.hovered_color_text.g, self.hovered_color_text.b)
-    else
-        pass:setColor(self.color_text.r, self.color_text.g, self.color_text.b)
-    end
-    pass:text(self.text, self.position + vec3(0, 0, 0.001), self.text_size)
+	-- Button text (add a small amount to the z to put the text slightly in front of button)
+	if self.active then
+		pass:setColor(self.active_color_text.r, self.active_color_text.g, self.active_color_text.b)
+	elseif self.hover then
+		pass:setColor(self.hovered_color_text.r, self.hovered_color_text.g, self.hovered_color_text.b)
+	else
+		pass:setColor(self.color_text.r, self.color_text.g, self.color_text.b)
+	end
+	pass:text(self.text, self.position + vec3(0, 0, 0.001), self.text_size)
 end
 
 --- Button's event handler (should be called from lovr.update)
 ---@param cb function The callback function
 function Button:handler(cb)
-    -- From https://lovr.org/docs/Interaction/Pointer_UI, modified
-    self.hover, self.active = false, false
+	-- From https://lovr.org/docs/Interaction/Pointer_UI, modified
+	self.hover, self.active = false, false
 
-    for _, hand in ipairs(lovr.headset.getHands()) do
-        -- Ray info:
-        local rayPosition = vec3(lovr.headset.getPosition(hand .. "/point"))
-        local rayDirection = vec3(lovr.headset.getDirection(hand .. "/point"))
+	for hand, state in pairs(tracking.get_hands()) do
+		-- Call the raycast helper function to get the intersection point of the ray and the button plane
+		local hit = raycast(state.pos, state.direction, self.position, vec3(0, 0, 1))
 
-        -- Call the raycast helper function to get the intersection point of the ray and the button plane
-        local hit = raycast(rayPosition, rayDirection, self.position, vec3(0, 0, 1))
+		local inside = false
+		if hit then
+			local bx, by = self.position:unpack()
+			local bw, bh = self.width / 2, self.height / 2
+			inside = (hit.x > bx - bw) and (hit.x < bx + bw) and (hit.y > by - bh) and (hit.y < by + bh)
+		end
 
-        local inside = false
-        if hit then
-            local bx, by = self.position:unpack()
-            local bw, bh = self.width / 2, self.height / 2
-            inside = (hit.x > bx - bw) and (hit.x < bx + bw) and (hit.y > by - bh) and (hit.y < by + bh)
-        end
+		-- If the ray intersects the plane, do a bounds test to make sure the x/y position of the hit
+		-- is inside the button, then mark the button as hover/active based on the trigger state.
+		if inside then
+			if lovr.headset.isDown(hand, "trigger") then
+				self.active = true
+			else
+				self.hover = true
+			end
 
-        -- If the ray intersects the plane, do a bounds test to make sure the x/y position of the hit
-        -- is inside the button, then mark the button as hover/active based on the trigger state.
-        if inside then
-            if lovr.headset.isDown(hand, "trigger") then
-                self.active = true
-            else
-                self.hover = true
-            end
-
-            if lovr.headset.wasReleased(hand, "trigger") then
-                cb()
-            end
-        end
-    end
+			if lovr.headset.wasReleased(hand, "trigger") then
+				cb()
+			end
+		end
+	end
 end
 
 return Button

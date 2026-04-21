@@ -1,5 +1,6 @@
-local button = require "ui.button"
-local sabers = require "ui.sabers"
+local button = require("ui.button")
+local sabers = require("ui.sabers")
+local tracking = require("util.tracking.tracking")
 --[[
  ___               _   ___   _           _         _
 (  _ \            ( )_(  _ \( )         ( )_      ( )
@@ -29,8 +30,8 @@ local b = button:new(0, 1, -2, 0, 0, 0, 2, 0.5, "Test-Button", 0.25)
 function lovr.draw(pass)
 	pass:text("Hello World!", 0, 2.2, -2, 0.5)
 	pass:text("BeatSketch", 0, 1.6, -2, 0.25)
-    b:draw(pass)
-    sabers.draw(pass)
+	b:draw(pass)
+	sabers.draw(pass)
 end
 
 -- ┌                                               ┐
@@ -40,9 +41,8 @@ end
 -- local tracking = require("util.tracking")
 -- local song = tracking:new()
 function lovr.update(delta_time)
-    b:handler(function ()
-        print("BOO")
-        sabers.angle = sabers.angle + 10
-    end)
-    sabers.track()
+	tracking.update_hands(delta_time)
+	b:handler(function()
+		print("BOO")
+	end)
 end
