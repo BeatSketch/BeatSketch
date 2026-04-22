@@ -1,5 +1,5 @@
-local button = require("ui.button")
-local sabers = require("ui.sabers")
+local button = require("ui.elements.button")
+local sabers = require("ui.controllers.sabers")
 local tracking = require("util.tracking.tracking")
 --[[
  ___               _   ___   _           _         _

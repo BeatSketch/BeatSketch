@@ -20,7 +20,7 @@
 - [ ] Assign tracking position to blocks
 - [ ] Grid system
 - [ ] Show lines for saber tip -> Discuss
-- [ ] Implement saber tip computation -> Needs to be unified
+- [x] Implement saber tip computation -> pos + dir * len for each state
 
 ## Others
 - [ ] BPM detect?
