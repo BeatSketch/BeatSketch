@@ -39,7 +39,7 @@ BeatMap.SABER_HAND = {
 }
 
 --- @enum CutDirection
-BeatMap.SABER_HAND = {
+BeatMap.CUT_DIRECTION = {
 	UP = 0,
 	DOWN = 1,
 	LEFT = 2,
