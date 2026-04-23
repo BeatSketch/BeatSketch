@@ -1,0 +1,1 @@
+-- Abstraction for inter-process communication with the python-based launcher, which also does the processing

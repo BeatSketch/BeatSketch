@@ -24,4 +24,5 @@
 
 ## Others
 - [ ] BPM detect?
+- [ ] Desktop user interface refuse to launch vr app if on wayland and no gamescope installed
 - [ ] Desktop UI to pick song file, cover art, song name, artist name, mapper name, bpm (or auto-detect)?, preview window?, preview duration?, save location for the map
