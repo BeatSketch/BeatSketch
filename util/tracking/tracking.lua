@@ -79,4 +79,41 @@ function M.get_head()
 	return tracker_states.head
 end
 
+function M.get_for_transmit()
+	return {
+		left = {
+			timestamp = tracker_states.left.delta, -- TODO: Make this actually use the absolute time stamp
+			pos = {
+				tracker_states.left.pos:unpack(),
+			},
+			direction = {
+				tracker_states.left.direction:unpack(),
+			},
+			quat = {
+				tracker_states.left.angle:unpack(),
+			},
+			tip = {
+				(tracker_states.left.pos + tracker_states.left.direction):unpack(),
+			},
+			buttons = tracker_states.left.buttons,
+		},
+		right = {
+			timestamp = tracker_states.right.delta, -- TODO: Make this actually use the absolute time stamp
+			pos = {
+				tracker_states.right.pos:unpack(),
+			},
+			direction = {
+				tracker_states.right.direction:unpack(),
+			},
+			quat = {
+				tracker_states.right.angle:unpack(),
+			},
+			tip = {
+				(tracker_states.right.pos + tracker_states.left.direction):unpack(),
+			},
+			buttons = tracker_states.right.buttons,
+		},
+	}
+end
+
 return M

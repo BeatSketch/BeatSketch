@@ -42,6 +42,7 @@ end
 function lovr.update(delta_time)
 	tracking.update_hands(delta_time)
     render.update()
+    ipc.send_json(tracking.get_for_transmit())
 end
 
 -- TODO: Allow gets (but only if certain args are set)

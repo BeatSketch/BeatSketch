@@ -9,6 +9,7 @@ function M.init(allow_gets)
 	if init_done then
 		return false
 	end
+    init_done = true
 	allow_get = allow_gets
 	print("[BeatSketch] IPC INIT COMPLETE")
 end
@@ -47,7 +48,7 @@ function M.send_json(data)
 		return false
 	end
 
-	print("json:" + json.encode(data))
+	print("json:" .. json.encode(data))
 	io.flush()
 end
 
@@ -58,7 +59,7 @@ function M.send_text(data)
 		return false
 	end
 
-	print("str:" + data)
+	print("str:" .. data)
 	io.flush()
 end
 
