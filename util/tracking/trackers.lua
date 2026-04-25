@@ -17,20 +17,17 @@ local button_list = {
 	"nib",
 }
 
+--- @alias button "trigger" | "thumbrest" | "grip" | "menu" | "a" | "b" | "x" | "y" | "nib"
 --- Get all buttons on the device that are pressed
 ---@param device "head" | "left" | "right"
----@param buttons string[]
+---@param buttons button[]
 ---@return string[]
 local function get_down_buttons(device, buttons)
 	local pressed = {}
 	local idx = 0
 
-	for _, value in pairs(buttons) do
-		if
-			pcall(function()
-				return lovr.headset.isDown(device, value)
-			end) and lovr.headset.isDown(device, value)
-		then
+	for _, value in ipairs(buttons) do
+		if lovr.headset.isDown(device, value) then
 			pressed[idx] = value
 			idx = idx + 1
 		end

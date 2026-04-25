@@ -24,7 +24,7 @@ local Tracking = {}
 --- @field direction Vec3 The direction vector
 --- @field angle Quat
 --- @field delta number
---- @field buttons string[]
+--- @field buttons button[]
 
 --- @alias PositionStates table<number, PositionState>
 
