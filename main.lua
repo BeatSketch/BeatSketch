@@ -1,7 +1,8 @@
-local button = require("ui.elements.button")
 local sabers = require("ui.controllers.sabers")
 local tracking = require("util.tracking.tracking")
-local render   = require("ui.render")
+local render = require("ui.render")
+local ipc = require("util.ipc")
+
 --[[
  ___               _   ___   _           _         _
 (  _ \            ( )_(  _ \( )         ( )_      ( )
@@ -22,18 +23,14 @@ function lovr.conf(t)
 	t.window.resizable = true
 end
 
-local b = button:new(0, 1, -2, 0, 0, 0, 2, 0.5, "Test-Button", 0.25)
 -- ┌                                               ┐
 -- │                    Drawing                    │
 -- └                                               ┘
 -- Drawing the screen is called once every frame
 --- @param pass Pass
 function lovr.draw(pass)
-	-- pass:text("Hello World!", 0, 2.2, -2, 0.5)
-	-- pass:text("BeatSketch", 0, 1.6, -2, 0.25)
-	-- b:draw(pass)
 	sabers.draw(pass)
-    render.draw_lanes(pass)
+    render.draw(pass)
 end
 
 -- ┌                                               ┐
@@ -44,7 +41,8 @@ end
 -- local song = tracking:new()
 function lovr.update(delta_time)
 	tracking.update_hands(delta_time)
-	b:handler(function()
-		print("BOO")
-	end)
+    render.update()
 end
+
+-- TODO: Allow gets (but only if certain args are set)
+ipc.init(false)
