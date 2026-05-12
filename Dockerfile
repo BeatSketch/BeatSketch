@@ -6,3 +6,5 @@ RUN "wget https://www.python.org/ftp/python/3.14.4/python-3.14.4-amd64.exe \
     && rm python-3.14.4-amd64.exe"
 
 RUN wine python -m pip install pyinstaller pyqt6
+# TODO: Download everything that is needed already, so it's just a git pull
+# Can upgrade the container if the deps need an update -> Much faster build
