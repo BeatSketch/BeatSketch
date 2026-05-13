@@ -1,2 +1,7 @@
 FROM debian
-RUN apt-get update && apt-get install git
+
+COPY . prepare.sh
+RUN ./prepare.sh
+COPY . build.sh
+
+CMD ["./build.sh"]

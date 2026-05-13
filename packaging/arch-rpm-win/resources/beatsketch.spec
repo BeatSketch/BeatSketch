@@ -15,7 +15,7 @@ A Beat Saber Map maker where you PLAY the map you envison in VR
 
 %prep
 # Move downloaded package to expected file format
-mv V%{version}.tar.gz %{name}-%{version}.tar.gz
+mv beatsketch.tar.gz %{name}-%{version}.tar.gz
 %setup -q
 
 %build
