@@ -43,7 +43,6 @@ Cloning Repos
 # Clone repos
 git clone https://github.com/BeatSketch/vr
 git clone https://github.com/BeatSketch/launcher
-# TODO: Run the download of the windows binary
 
 # ── Python deps ─────────────────────────────────────────────────────
 # Install deps
@@ -59,6 +58,14 @@ Installing pip packages in Linux
 "
 pip install --break-system-packages pyinstaller
 pip install --break-system-packages -r requirements.txt
+
+# ── Windows LÖVR binary ─────────────────────────────────────────────
+cd ../vr
+mkdir LOVR-Windows
+cd LOVR-Windows
+wget https://lovr.org/download/windows
+unzip windows
+rm windows
 
 # ── Cleanup ─────────────────────────────────────────────────────────
 echo "

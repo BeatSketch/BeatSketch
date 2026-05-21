@@ -6,7 +6,6 @@ echo "
 "
 cd vr
 # Args: build_linux, build_win, build_mac
-# TODO: Caching the windows binary
 ./build.sh true true false
 cp ./BeatSketch ../launcher
 
