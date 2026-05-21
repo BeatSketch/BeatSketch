@@ -1,3 +1,4 @@
+# TODO: Install packaging tools needed
 apt-get update && apt-get install git python-pip
 
 # Clone repos
