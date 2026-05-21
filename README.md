@@ -1,6 +1,8 @@
 # BeatSketch
 A Beat Saber Map maker where you PLAY the map you envison in VR 
 
+If you can't code and still want to help out, [uploading BSOR files](https://polybox.ethz.ch/index.php/s/RbRFRgc7WnmotAg) is an easy way.
+
 ## Meta repository
 This repository is used for releases, docs and build scripts.
 The actual source code is in separate repositories:
