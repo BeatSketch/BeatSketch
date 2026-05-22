@@ -44,6 +44,8 @@ Cloning Repos
 git clone https://github.com/BeatSketch/vr
 git clone https://github.com/BeatSketch/launcher
 
+# TODO: Where to get trained models from? Git lfs in dataset repo?
+
 # ── Python deps ─────────────────────────────────────────────────────
 # Install deps
 echo "
@@ -60,6 +62,9 @@ pip install --break-system-packages pyinstaller
 pip install --break-system-packages -r requirements.txt
 
 # ── Windows LÖVR binary ─────────────────────────────────────────────
+echo "
+Downloading Windows binaries of LOVR to speed up build
+"
 cd ../vr
 mkdir LOVR-Windows
 cd LOVR-Windows

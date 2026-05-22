@@ -6,11 +6,21 @@ echo "
 "
 cd vr
 # Args: build_linux, build_win, build_mac
+git pull
 ./build.sh true true false
 cp ./BeatSketch ../launcher
 
 # ── Build RPM ───────────────────────────────────────────────────────
+# TODO: Copy the models (and where to get them from?)
+# I guess we could use the repo with git lfs?
+# For that need to have git-lfs installed in container and configured
+echo "
+Updating repos
+"
+cd ../launcher
+git pull
 cd ..
+
 echo "
 ==> Creating RPM
 "
