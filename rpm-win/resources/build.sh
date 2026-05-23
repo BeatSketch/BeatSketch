@@ -1,6 +1,11 @@
-# #!/bin/sh
+#!/bin/sh
 
 # ── Build VR application ────────────────────────────────────────────
+set -e
+workdir=$(pwd)
+echo "$workdir"
+
+cd /build
 echo "
 ==> Building VR application
 "
@@ -10,25 +15,32 @@ git pull
 ./build.sh true true false
 cp ./BeatSketch ../launcher
 
-# ── Build RPM ───────────────────────────────────────────────────────
-# TODO: Copy the models (and where to get them from?)
-# I guess we could use the repo with git lfs?
-# For that need to have git-lfs installed in container and configured
+# ── Complete launcher ───────────────────────────────────────────────
 echo "
-Updating repos
+Updating launcher, downloading models
 "
 cd ../launcher
 git pull
-cd ..
 
+# Download models
+cd models
+cat models.txt | while read model; do
+    wget "https://github.com/BeatSketch/dataset/raw/refs/heads/main/models/${model}"
+done
+
+cd /build
+
+# Archive
 echo "
-==> Creating RPM
+Archiving...
 "
-# TODO: tar the files in here, then rename to beatsketch.tar.gz
-# Then run rpm build
-# TODO: Probably not *this* easy
-rpmbuild -bs beatsketch.spec
-ls -la
+tar czf ./beatsketch.tar.gz --directory ./launcher .
+
+# ── Create AppImage ─────────────────────────────────────────────────
+echo "
+==> Creating AppImage
+"
+# FIXME: Actually do this
 
 # ── Peasants (Windows) ──────────────────────────────────────────────
 # This is a different spec file! (i.e. a PyInstaller spec file)
@@ -36,5 +48,11 @@ cd launcher
 rm ./BeatSketch
 cp ../vr/BeatSketch.exe .
 wine python -m PyInstaller BeatSketch.spec
+ls dist
+cd ..
 
+# ── Finalization ────────────────────────────────────────────────────
 # Collect bundles in one folder (for release creation)
+# cp ~/rpmbuild/RPMS/x86_64/* $workdir
+cp ./beatsketch.tar.gz $workdir
+cp ./launcher/dist/BeatSketch.exe $workdir

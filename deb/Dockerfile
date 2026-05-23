@@ -1,7 +1,7 @@
 FROM debian
 
-COPY . prepare.sh
+COPY ./resources/ /build
+WORKDIR /build
 RUN ./prepare.sh
-COPY . build.sh
 
 CMD ["./build.sh"]

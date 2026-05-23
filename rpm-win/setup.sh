@@ -15,6 +15,7 @@ pacman -Sy xorg-server-xvfb --noconfirm
 echo "
 Configuring Wine
 "
+set -e
 umask 0
 export WINEDLLOVERRIDES="winemenubuilder.exe,mscoree,mshtml="
 wine reg add 'HKCU\Software\Wine\DllOverrides' /v winemenubuilder.exe /t REG_SZ /d '' /f
@@ -35,42 +36,6 @@ Installing Windows Python in Wine
 wget https://www.python.org/ftp/python/3.14.4/python-3.14.4-amd64.exe
 DISPLAY=:0.0 wine cmd /c 'python-3.14.4-amd64.exe /quiet TargetDir=C:\\Python Include_doc=0 PrependPath=1'
 rm python-3.14.4-amd64.exe
-
-# ── Repos ───────────────────────────────────────────────────────────
-echo "
-Cloning Repos
-"
-# Clone repos
-git clone https://github.com/BeatSketch/vr
-git clone https://github.com/BeatSketch/launcher
-
-# TODO: Where to get trained models from? Git lfs in dataset repo?
-
-# ── Python deps ─────────────────────────────────────────────────────
-# Install deps
-echo "
-Installing deps
-"
-cd launcher
-wine python -m pip install pyinstaller
-wine python -m pip install -r requirements.txt
-
-echo "
-Installing pip packages in Linux
-"
-pip install --break-system-packages pyinstaller
-pip install --break-system-packages -r requirements.txt
-
-# ── Windows LÖVR binary ─────────────────────────────────────────────
-echo "
-Downloading Windows binaries of LOVR to speed up build
-"
-cd ../vr
-mkdir LOVR-Windows
-cd LOVR-Windows
-wget https://lovr.org/download/windows
-unzip windows
-rm windows
 
 # ── Cleanup ─────────────────────────────────────────────────────────
 echo "

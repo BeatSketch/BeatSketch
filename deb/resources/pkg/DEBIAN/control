@@ -1,0 +1,10 @@
+Source: beatsketch
+Section: utils
+Priority: optional
+Maintainer: Janis Hutz <development@janishutz.com>
+Homepage: https://beatsketch.github.io
+Package: beatsketch
+Version: 1.0.0-1+bookworm
+Architecture: amd64
+Depends: python3-yaml, python3-pyqt6, python3, python3-onnxruntime, python3-jsonschema, python3-colorama, python3-numpy
+Description: A Beat Saber Map maker where you PLAY the map you envison in VR

@@ -9,10 +9,10 @@ The actual source code is in separate repositories:
 - For the VR application: [here](https://github.com/BeatSketch/vr)
 - For the launcher: [here](https://github.com/BeatSketch/launcher)
 
-## TODOs
-- [ ] Finish Dockerfile
-- [ ] Migrate the Dockerfile to the Arch image (because cross-building for debian and rpm works there)
-- [ ] Verify python in wine installation
-- [ ] Pick an installer builder for Windows
-- [ ] Figure out how to best build for mac
-- [ ] Create a deb package
+## Packaging notes
+Due to lack of time, we currently only have three kinds of Linux packages.
+- ArchLinux package (available in the AUR)
+- AppImage (you can simply download it, run `chmod +x` on it and you will be able to execute it)
+- Semi-built tarball (which is what the PKGBUILD in the AUR uses to build)
+
+There are plans to eventually also provide RPMs and Deb.

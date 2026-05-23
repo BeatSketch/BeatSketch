@@ -3,7 +3,7 @@ description: Build BeatSketch for Debian
 author: Janis Hutz
 runs:
   using: docker
-  image: "docker://ghcr.io/BeatSketch/beatsketch-build-deb"
+  image: "docker://ghcr.io/BeatSketch/build-deb"
 branding:
   icon: book
   color: red

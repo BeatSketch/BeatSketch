@@ -1,0 +1,27 @@
+name: Create and publish build container
+on:
+  workflow_dispatch:
+jobs:
+  build_container:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+      - name: Build image for building windows and rpm builds
+        run: docker buildx build ./rpm-win --tag ghcr.io/beatsketch/build-win-rpm
+      - name: Publish the container to GitHub Container Registry
+        run: |
+          docker push ghcr.io/beatsketch/build-win-rpm
+      - name: Build image for building debian builds
+        run: docker buildx build ./deb --tag ghcr.io/beatsketch/build-deb
+      - name: Publish the container to GitHub Container Registry
+        run: |
+          docker push ghcr.io/beatsketch/build-deb
+      - name: Login to registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
