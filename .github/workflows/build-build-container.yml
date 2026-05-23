@@ -1,0 +1,22 @@
+name: Create and publish build container
+on:
+  workflow_dispatch:
+jobs:
+  build_container:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+      - name: Build image
+        run: docker buildx build . --tag ghcr.io/eye-tap/frontend
+      - name: Login to registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Publish to GitHub Container Registry
+        run: |
+          docker push ghcr.io/eye-tap/frontend
