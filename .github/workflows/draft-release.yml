@@ -6,6 +6,10 @@ on:
         description: The Tag to create for this release
         type: string
         required: true
+      name:
+        description: The name of the release (OPTIONAL)
+        type: string
+        required: false
 jobs:
   draft_release:
     runs-on: ubuntu-latest
@@ -22,7 +26,8 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "beatsketch-linux.tar.gz,beatsketch-binary-linux.tar.gz,beatsketch-windows.zip"
-          body: "# BeatSketch ${{ inputs.tag }}"
+          body: "# BeatSketch ${{ inputs.tag }}\n\nTODO: Explain the major features and changes here"
           draft: true
           generateReleaseNotes: true
           tag: ${{ inputs.tag }}
+          name: ${{ inputs.name }}
