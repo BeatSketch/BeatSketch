@@ -1,4 +1,4 @@
-name: Draft a new release
+name: "[DEBUG] Draft a new release"
 on:
   workflow_dispatch:
     inputs:
@@ -13,7 +13,7 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v6
       - name: Build the release
-        uses: ./.github/actions/main-build
+        uses: ./.github/actions/main-build-debug
         with:
           out: /github/workspace
       - name: List files
