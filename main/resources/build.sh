@@ -40,27 +40,33 @@ Archiving...
 "
 tar czf ./beatsketch.tar.gz --directory ./launcher .
 
-# ── Create AppImage ─────────────────────────────────────────────────
+# ── Create Linux Binary ─────────────────────────────────────────────
 echo "
-==> Creating AppImage
+==> Building Linux Application using PyInstaller
 "
 cd launcher
 python -m PyInstaller beatsketch_launcher.spec
-appimage-builder --recipe AppImageBuilder.yml
+tar czf ./beatsketch-binary.tar.gz --directory ./dist/beatsketch .
 
 # ── Peasants (Windows) ──────────────────────────────────────────────
 # This is a PyInstaller spec file
-cd launcher
+echo "
+==> Building for Windows using PyInstaller
+"
 rm ./BeatSketch
-wine python -m PyInstaller BeatSketch.spec
+rm -rf ./dist/beatsketch
+wine C:/Python/python.exe -m PyInstaller beatsketch_launcher.spec
 
 # Copy the VR application into the bundle
-cp ../vr/BeatSketch.exe ./dist/BeatSketch
-zip -9r BeatSketch.zip ./dist/beatsketch
+cp ../vr/BeatSketch.exe ./dist/beatsketch
+zip -9rq BeatSketch.zip ./dist/beatsketch
 cd ..
 
 # ── Finalization ────────────────────────────────────────────────────
 # Collect bundles in one folder (for release creation)
 # cp ~/rpmbuild/RPMS/x86_64/* $workdir
-cp ./beatsketch.tar.gz $workdir
-cp ./launcher/dist/BeatSketch.zip $workdir
+cp ./beatsketch.tar.gz $workdir | true
+cp ./launcher/beatsketch-binary.tar.gz $workdir | true
+cp ./launcher/BeatSketch.zip $workdir | true
+
+ls $workdir

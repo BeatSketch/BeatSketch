@@ -5,3 +5,4 @@
 - [ ] Pick an installer builder for Windows
 - [ ] Figure out how to best build for mac
 - [ ] Create a deb package
+- [ ] App Image? (Would need another separate docker container)

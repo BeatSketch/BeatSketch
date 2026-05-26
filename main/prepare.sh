@@ -1,3 +1,4 @@
+set -e
 # ── Repos ───────────────────────────────────────────────────────────
 echo "
 Cloning Repos
@@ -7,19 +8,19 @@ git clone https://github.com/BeatSketch/vr
 git clone https://github.com/BeatSketch/launcher
 
 # ── Python deps ─────────────────────────────────────────────────────
-echo "
-Installing pip packages in Linux
-"
 cd launcher
-pip install --break-system-packages pyinstaller
-pip install --break-system-packages -r requirements.txt
-
-# Install deps
 echo "
 Installing pip packages in Wine
 "
-wine python -m pip install pyinstaller
-wine python -m pip install -r requirements.txt
+wine C:/Python/python.exe -m pip install pyinstaller
+wine C:/Python/python.exe -m pip install -r requirements.txt
+
+echo "
+Installing pip packages in Linux
+"
+pip install --break-system-packages pyinstaller
+pip install --break-system-packages -r requirements.txt
+
 cd ..
 
 # ── LÖVR binaries ───────────────────────────────────────────────────
