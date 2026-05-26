@@ -13,6 +13,11 @@ else
 	fi
 fi
 
+cd
+pwd
+
+export HOME=/root
+
 echo "
 Workdir: $outdir
 "
