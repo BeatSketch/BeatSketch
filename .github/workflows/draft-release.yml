@@ -29,5 +29,8 @@ jobs:
           body: "# BeatSketch ${{ inputs.tag }}\n\nTODO: Explain the major features and changes here"
           draft: true
           generateReleaseNotes: true
+          artifactErrorsFailBuild: true
+          replacesArtifacts: true
+          updateOnlyUnreleased: true
           tag: ${{ inputs.tag }}
           name: ${{ inputs.name }}
