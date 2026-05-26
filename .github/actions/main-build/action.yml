@@ -1,0 +1,9 @@
+name: Build (Win + AppImage + Linux Bundle)
+description: Build BeatSketch for Windows, AppImage and Linux Bundle
+author: Janis Hutz
+runs:
+  using: docker
+  image: "docker://ghcr.io/BeatSketch/build:"
+branding:
+  icon: book
+  color: red

@@ -1,9 +1,0 @@
-name: Build (Win + RPM)
-description: Build BeatSketch for Windows and RPM
-author: Janis Hutz
-runs:
-  using: docker
-  image: "docker://ghcr.io/BeatSketch/build-win-rpm"
-branding:
-  icon: book
-  color: red

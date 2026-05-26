@@ -8,6 +8,6 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v6
       - name: Upload to ComSol
-        uses: ./.github/actions/win-rpm-build
+        uses: ./.github/actions/main-build
       - name: List files
         run: ls -la
