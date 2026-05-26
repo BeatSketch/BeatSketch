@@ -72,8 +72,8 @@ cd ..
 # ── Finalization ────────────────────────────────────────────────────
 # Collect bundles in one folder (for release creation)
 # cp ~/rpmbuild/RPMS/x86_64/* $workdir
-cp ./beatsketch.tar.gz $outdir | true
-cp ./launcher/beatsketch-binary.tar.gz $outdir | true
-cp ./launcher/BeatSketch.zip $outdir | true
+cp ./beatsketch.tar.gz $outdir/beatsketch-linux.tar.gz | true
+cp ./launcher/beatsketch-binary.tar.gz $outdir/beatsketch-binary-linux.tar.gz | true
+cp ./launcher/BeatSketch.zip $outdir/beatsketch-window.zip | true
 
 ls $outdir
