@@ -10,8 +10,6 @@ jobs:
   draft_release:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v6
       - name: Build the release
         uses: ./.github/actions/main-build
       - name: List files
