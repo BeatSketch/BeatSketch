@@ -14,9 +14,7 @@ fi
 
 echo "
 Workdir: $outdir
-Files in this directory:
 "
-ls -l
 
 cd /build
 echo "

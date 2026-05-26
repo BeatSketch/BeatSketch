@@ -14,4 +14,4 @@ COPY ./resources/ /build
 RUN chmod +x ./build.sh
 RUN chmod +x ./vr/build.sh
 
-CMD ["/build/build.sh"]
+ENTRYPOINT ["/build/build.sh"]
