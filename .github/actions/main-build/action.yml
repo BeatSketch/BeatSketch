@@ -3,7 +3,7 @@ description: Build BeatSketch for Windows, AppImage and Linux Bundle
 author: Janis Hutz
 runs:
   using: docker
-  image: "docker://ghcr.io/BeatSketch/build:"
+  image: "docker://ghcr.io/beatsketch/build"
 branding:
   icon: book
   color: red
