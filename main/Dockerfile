@@ -10,8 +10,6 @@ COPY ./prepare.sh /build/prepare.sh
 RUN chmod +x prepare.sh
 RUN ./prepare.sh
 
-COPY ../BeatSketch.desktop /build/launcher
-
 COPY ./resources/ /build
 RUN chmod +x ./build.sh
 RUN chmod +x ./vr/build.sh
