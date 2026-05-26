@@ -18,8 +18,6 @@ jobs:
         uses: ./.github/actions/main-build-debug
         with:
           out: /github/workspace
-      - name: List files
-        run: ls -la
       - name: Draft release
         uses: ncipollo/release-action@v1
         with:

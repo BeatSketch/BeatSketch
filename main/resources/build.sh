@@ -76,6 +76,6 @@ cd ..
 # cp ~/rpmbuild/RPMS/x86_64/* $workdir
 cp ./beatsketch.tar.gz $outdir/beatsketch-linux.tar.gz | true
 cp ./launcher/beatsketch-binary.tar.gz $outdir/beatsketch-binary-linux.tar.gz | true
-cp ./launcher/BeatSketch.zip $outdir/beatsketch-window.zip | true
+cp ./launcher/BeatSketch.zip $outdir/beatsketch-windows.zip | true
 
 ls $outdir
