@@ -2,9 +2,18 @@
 
 # ── Build VR application ────────────────────────────────────────────
 set -e
-workdir=$(pwd)
+if [ $# -eq 0 ]; then
+	outdir=$(pwd)
+else
+	if [ -z "$1" ]; then
+		outdir=$(pwd)
+	else
+		outdir=$1
+	fi
+fi
+
 echo "
-Workdir: $workdir
+Workdir: $outdir
 Files in this directory:
 "
 ls -l
@@ -65,8 +74,8 @@ cd ..
 # ── Finalization ────────────────────────────────────────────────────
 # Collect bundles in one folder (for release creation)
 # cp ~/rpmbuild/RPMS/x86_64/* $workdir
-cp ./beatsketch.tar.gz $workdir | true
-cp ./launcher/beatsketch-binary.tar.gz $workdir | true
-cp ./launcher/BeatSketch.zip $workdir | true
+cp ./beatsketch.tar.gz $outdir | true
+cp ./launcher/beatsketch-binary.tar.gz $outdir | true
+cp ./launcher/BeatSketch.zip $outdir | true
 
-ls $workdir
+ls $outdir
