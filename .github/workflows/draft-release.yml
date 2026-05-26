@@ -1,0 +1,13 @@
+name: Draft a new release
+on:
+  workflow_dispatch:
+jobs:
+  draft_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v6
+      - name: Upload to ComSol
+        uses: ./.github/actions/win-rpm-build
+      - name: List files
+        run: ls -la

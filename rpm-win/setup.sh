@@ -4,7 +4,7 @@ set -e
 echo "
 Setting up extra deps
 "
-pacman -Sy xorg-server-xvfb --noconfirm
+pacman -Sy xorg-server-xvfb base-devel --noconfirm
 
 # ── Wine config ─────────────────────────────────────────────────────
 # From https://github.com/webcomics/pywine/blob/main/wine-init.sh
@@ -37,8 +37,17 @@ wget https://www.python.org/ftp/python/3.14.4/python-3.14.4-amd64.exe
 DISPLAY=:0.0 wine cmd /c 'python-3.14.4-amd64.exe /quiet TargetDir=C:\\Python Include_doc=0 PrependPath=1'
 rm python-3.14.4-amd64.exe
 
+cd ~
+git clone https://aur.archlinux.org/appimage-builder-bin.git
+cd appimage-builder-bin
+makepkg -si --noconfirm
+cd ..
+rm -rf ./appimage-builder-bin
+
+cd /build
+
 # ── Cleanup ─────────────────────────────────────────────────────────
 echo "
 Cleaning up
 "
-pacman -Rs xorg-server-xvfb --noconfirm
+pacman -Rs xorg-server-xvfb base-devel --noconfirm

@@ -3,7 +3,11 @@
 # ── Build VR application ────────────────────────────────────────────
 set -e
 workdir=$(pwd)
-echo "$workdir"
+echo "
+Workdir: $workdir
+Files in this directory:
+"
+ls -l
 
 cd /build
 echo "
@@ -25,7 +29,7 @@ git pull
 # Download models
 cd models
 cat models.txt | while read model; do
-    wget "https://github.com/BeatSketch/dataset/raw/refs/heads/main/models/${model}"
+	wget "https://github.com/BeatSketch/dataset/raw/refs/heads/main/models/${model}"
 done
 
 cd /build
@@ -40,19 +44,23 @@ tar czf ./beatsketch.tar.gz --directory ./launcher .
 echo "
 ==> Creating AppImage
 "
-# FIXME: Actually do this
+cd launcher
+python -m PyInstaller beatsketch_launcher.spec
+appimage-builder --recipe AppImageBuilder.yml
 
 # ── Peasants (Windows) ──────────────────────────────────────────────
-# This is a different spec file! (i.e. a PyInstaller spec file)
+# This is a PyInstaller spec file
 cd launcher
 rm ./BeatSketch
-cp ../vr/BeatSketch.exe .
 wine python -m PyInstaller BeatSketch.spec
-ls dist
+
+# Copy the VR application into the bundle
+cp ../vr/BeatSketch.exe ./dist/BeatSketch
+zip -9r BeatSketch.zip ./dist/beatsketch
 cd ..
 
 # ── Finalization ────────────────────────────────────────────────────
 # Collect bundles in one folder (for release creation)
 # cp ~/rpmbuild/RPMS/x86_64/* $workdir
 cp ./beatsketch.tar.gz $workdir
-cp ./launcher/dist/BeatSketch.exe $workdir
+cp ./launcher/dist/BeatSketch.zip $workdir
