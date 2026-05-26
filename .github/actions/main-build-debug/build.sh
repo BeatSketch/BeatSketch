@@ -2,7 +2,6 @@
 
 # ── Build VR application ────────────────────────────────────────────
 set -e
-whoami
 if [ $# -eq 0 ]; then
 	outdir=$(pwd)
 else
@@ -12,9 +11,6 @@ else
 		outdir=$1
 	fi
 fi
-
-cd
-pwd
 
 export HOME=/root
 
