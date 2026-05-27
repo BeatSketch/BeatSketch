@@ -55,6 +55,7 @@ echo "
 "
 cd launcher
 python -m PyInstaller beatsketch_launcher.spec
+cp -r ./models ./dist/beatsketch
 tar czf ./beatsketch-binary.tar.gz --directory ./dist/beatsketch .
 
 # ── Peasants (Windows) ──────────────────────────────────────────────
@@ -68,6 +69,7 @@ wine C:/Python/python.exe -m PyInstaller beatsketch_launcher.spec
 
 # Copy the VR application into the bundle
 cp ../vr/BeatSketch.exe ./dist/beatsketch
+cp -r ./models ./dist/beatsketch
 zip -9rq BeatSketch.zip ./dist/beatsketch
 cd ..
 
