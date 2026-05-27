@@ -1,5 +1,7 @@
 FROM archlinux
 
+LABEL description="Build container for BeatSketch to build the Linux and Windows packages"
+
 RUN pacman -Sy wine wget git python-pip unzip zip --noconfirm
 COPY ./setup.sh /build/setup.sh
 WORKDIR /build
