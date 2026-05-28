@@ -74,11 +74,11 @@ cp -r ../vr/LOVR-Windows/* ./dist/beatsketch
 cd ./dist/beatsketch
 rm ./lovr.exe
 zip -9rq BeatSketch.zip .
-cd ..
+cd /build
 
 # ── Finalization ────────────────────────────────────────────────────
 # Collect bundles in one folder (for release creation)
 # cp ~/rpmbuild/RPMS/x86_64/* $workdir
 cp ./beatsketch.tar.gz $outdir/beatsketch-linux.tar.gz | true
 cp ./launcher/beatsketch-binary.tar.gz $outdir/beatsketch-binary-linux.tar.gz | true
-cp ./launcher/BeatSketch.zip $outdir/beatsketch-windows.zip | true
+cp ./launcher/dist/beatsketchBeatSketch.zip $outdir/beatsketch-windows.zip | true
