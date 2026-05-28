@@ -1,5 +1,13 @@
-# BeatSketch
-A Beat Saber Map maker where you PLAY the map you envison in VR 
+<div id="title" align="center">
+    <img src="https://raw.githubusercontent.com/BeatSketch/.github/main/assets/logo-banner.jpg">
+</div>
+
+----
+
+<div id="title" align="center">
+    A Beat Saber Map maker where you PLAY the map you envison in VR
+</div>
+
 
 ## Features
 - Coming soon
