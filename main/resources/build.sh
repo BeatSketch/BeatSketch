@@ -70,7 +70,10 @@ wine C:/Python/python.exe -m PyInstaller beatsketch_launcher.spec
 # Copy the VR application into the bundle
 cp ../vr/BeatSketch.exe ./dist/beatsketch
 cp -r ./models ./dist/beatsketch
-zip -9rq BeatSketch.zip ./dist/beatsketch
+cp -r ../vr/LOVR-Windows/* ./dist/beatsketch
+cd ./dist/beatsketch
+rm ./lovr.exe
+zip -9rq BeatSketch.zip .
 cd ..
 
 # ── Finalization ────────────────────────────────────────────────────
@@ -79,5 +82,3 @@ cd ..
 cp ./beatsketch.tar.gz $outdir/beatsketch-linux.tar.gz | true
 cp ./launcher/beatsketch-binary.tar.gz $outdir/beatsketch-binary-linux.tar.gz | true
 cp ./launcher/BeatSketch.zip $outdir/beatsketch-windows.zip | true
-
-ls $outdir
