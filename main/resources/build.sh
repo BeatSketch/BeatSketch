@@ -57,6 +57,7 @@ cd launcher
 python -m PyInstaller beatsketch_launcher.spec
 cp -r ./models ./dist/beatsketch
 cp ./config.yml ./dist/beatsketch
+cp ./config.schema.json ./dist/beatsketch
 tar czf ./beatsketch-binary.tar.gz --directory ./dist/beatsketch .
 
 # ── Peasants (Windows) ──────────────────────────────────────────────
@@ -73,6 +74,7 @@ cp ../vr/BeatSketch.exe ./dist/beatsketch
 cp -r ./models ./dist/beatsketch
 cp -r ../vr/LOVR-Windows/* ./dist/beatsketch
 cp ./config.yml ./dist/beatsketch
+cp ./config.schema.json ./dist/beatsketch
 cd ./dist/beatsketch
 rm ./lovr.exe
 zip -9rq BeatSketch.zip .
