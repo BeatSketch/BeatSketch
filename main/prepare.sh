@@ -31,12 +31,12 @@ Downloading binaries of LOVR to speed up build
 cd vr
 mkdir LOVR-Windows
 cd LOVR-Windows
-wget https://lovr.org/download/windows
+wget -O windows https://github.com/bjornbytes/lovr/releases/download/v0.18.0/lovr-v0.18.0-win64.zip
 unzip windows
 rm windows
 cd ../
 mkdir LOVR-Linux
 cd LOVR-Linux
-wget -O lovr https://lovr.org/download/linux
+wget -O lovr https://github.com/bjornbytes/lovr/releases/download/v0.18.0/lovr-v0.18.0-x86_64.AppImage
 chmod +x lovr
 cd /build
