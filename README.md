@@ -5,7 +5,7 @@
 ----
 
 <div id="title" align="center">
-    A Beat Saber Map maker where you PLAY the map you envison in VR
+    A Beat Saber Map maker where you PLAY the map you envision in VR
 </div>
 
 
