@@ -7,10 +7,10 @@ pkgdesc='A Beat Saber Map maker where you PLAY the map you envison in VR'
 arch=('any')
 url="https://github.com/BeatSketch/launcher"
 license=('GPL3')
-depends=('python', 'python-pyqt6', 'python-yaml', 'python-onnxruntime', 'python-jsonschema', 'python-colorama', 'python-numpy')
-makedepends=('python-build', 'python-installer')
+depends=('python' 'python-pyqt6' 'python-yaml' 'python-onnxruntime' 'python-jsonschema' 'python-colorama' 'python-numpy')
+makedepends=('python-build' 'python-installer')
 provides=('beatsketch')
-conflicts=('beatsketch', 'beatsketch-launcher')
+conflicts=('beatsketch' 'beatsketch-launcher')
 source=("$pkgname-$pkgver"::https://github.com/BeatSketch/BeatSketch/archives/refs/tags/V${pkgver}.tar.gz)
 sha256sums=('SKIP') # TODO: Add?
 
