@@ -55,6 +55,9 @@ echo "
 "
 cd launcher
 python -m PyInstaller beatsketch_launcher.spec
+cp -r ./models ./dist/beatsketch
+cp ./config.yml ./dist/beatsketch
+cp ./config.schema.json ./dist/beatsketch
 tar czf ./beatsketch-binary.tar.gz --directory ./dist/beatsketch .
 
 # ── Peasants (Windows) ──────────────────────────────────────────────
@@ -68,14 +71,18 @@ wine C:/Python/python.exe -m PyInstaller beatsketch_launcher.spec
 
 # Copy the VR application into the bundle
 cp ../vr/BeatSketch.exe ./dist/beatsketch
-zip -9rq BeatSketch.zip ./dist/beatsketch
-cd ..
+cp -r ./models ./dist/beatsketch
+cp -r ../vr/LOVR-Windows/* ./dist/beatsketch
+cp ./config.yml ./dist/beatsketch
+cp ./config.schema.json ./dist/beatsketch
+cd ./dist/beatsketch
+rm ./lovr.exe
+zip -9rq BeatSketch.zip .
+cd /build
 
 # ── Finalization ────────────────────────────────────────────────────
 # Collect bundles in one folder (for release creation)
 # cp ~/rpmbuild/RPMS/x86_64/* $workdir
 cp ./beatsketch.tar.gz $outdir/beatsketch-linux.tar.gz | true
 cp ./launcher/beatsketch-binary.tar.gz $outdir/beatsketch-binary-linux.tar.gz | true
-cp ./launcher/BeatSketch.zip $outdir/beatsketch-windows.zip | true
-
-ls $outdir
+cp ./launcher/dist/beatsketch/BeatSketch.zip $outdir/beatsketch-windows.zip | true

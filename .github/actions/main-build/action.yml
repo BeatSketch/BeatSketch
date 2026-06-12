@@ -1,5 +1,5 @@
-name: Build (Win + AppImage + Linux Bundle)
-description: Build BeatSketch for Windows, AppImage and Linux Bundle
+name: Debug build
+description: Build BeatSketch for Windows, AppImage and Linux Bundle (debug)
 author: Janis Hutz
 inputs:
   out:
@@ -8,7 +8,7 @@ inputs:
     required: false
 runs:
   using: docker
-  image: "docker://ghcr.io/beatsketch/build"
+  image: Dockerfile
   args:
     - ${{ inputs.out }}
 branding:
