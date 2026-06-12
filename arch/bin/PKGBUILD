@@ -1,18 +1,18 @@
 # Maintainer: Janis Hutz <development@janishutz.com>
 
-pkgname=beatsketch
+pkgname=beatsketch-bin
 pkgver=1.0.0
 pkgrel=1
 pkgdesc='A Beat Saber Map maker where you PLAY the map you envison in VR'
 arch=('any')
-url="https://github.com/BeatSketch/launcher"
+url="https://github.com/BeatSketch/BeatSketch"
 license=('GPL3')
 depends=('python' 'python-pyqt6' 'python-yaml' 'python-onnxruntime' 'python-jsonschema' 'python-colorama' 'python-numpy')
 makedepends=('python-build' 'python-installer')
 provides=('beatsketch')
 conflicts=('beatsketch' 'beatsketch-launcher')
-source=("$pkgname-$pkgver"::https://github.com/BeatSketch/BeatSketch/archives/refs/tags/V${pkgver}.tar.gz)
-sha256sums=('SKIP') # TODO: Add?
+source=("$pkgname-$pkgver"::https://github.com/BeatSketch/BeatSketch/releases/download/V${pkgver}/beatsketch-binary-linux.tar.gz)
+sha256sums=('sha256:cff9d268d176283e42a8b6c35cd054a088013e1326d81007462e85471d8b71f8') # TODO: Add?
 
 build() {
     cd "$srcdir/$pkgname-$pkgver"
