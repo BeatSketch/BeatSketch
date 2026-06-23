@@ -8,6 +8,11 @@
     A Beat Saber Map maker where you PLAY the map you envision in VR
 </div>
 
+## Devlopment notes
+BeatSketch has now reached V1 stable status.
+We have plans to improve the classifier and also explore other means of generating the maps,
+including an attempt at using a transformer model. These features will arrive when we find the time to work on BeatSketch.
+
 
 ## Features
 - Coming soon
